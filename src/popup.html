@@ -1,0 +1,183 @@
+﻿<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8">
+    <title>Tweet Savior</title>
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/twitterSaviorStyles.css">
+	<style>
+		*{
+			box-sizing: border-box;
+		}
+		body{
+			color:black;
+			font-family: "Roboto", sans-serif;
+			margin:0;
+			overflow:hidden;
+			padding:10px 10px 20px;
+			background-repeat:repeat-x;
+			color:#4F545A;
+			min-width:640px;
+		}
+		
+		.topbar {
+			background: #0e90d2;
+			padding: 10px 15px;
+			margin-left: -15px;
+			margin-right: -15px;
+			color: white;
+		}
+		.heading {
+			font-weight: 300;
+			margin-bottom: 10px;
+		}
+		.topbar h1.heading {
+			display: inline-block;
+			font-size: 1.4em;
+			margin:0;
+		}
+		.topbar span.version {
+			display: inline-block;
+			float:right;
+			font-size:0.8em;
+			font-weight:300;
+			line-height:29px;
+			
+		}
+		.half-cont {
+			display: inline-block;
+			float: left;
+			padding: 0 10px;
+			width: 300px;
+		}
+		.clearfix:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		.pillbox {
+			margin-bottom: 0.5em;
+			list-style-type: none;
+			padding-left: 0;
+			padding-top: 0;
+		}
+		.pillbox > li {
+			position: relative;
+			font-size: 100%;
+			font-weight: 400;
+			display: inline-block;
+			vertical-align:middle;
+			color: rgba(0, 0, 0, .6);
+			text-align: center;
+			-webkit-user-drag: none;
+			-webkit-user-select: none;
+			background: rgba(0, 0, 0, .1);
+			border: solid 3px rgba(0, 0, 0, .05);
+			border-radius: 0.3em;
+			margin-bottom: 0.3em;
+			padding: 0.2em 0.5em;
+			padding-right: 1.5em;
+		}
+		
+		.pillbox > li + li {
+			margin-left: 0.3em;
+		}
+		
+		.pillbox > li > span.deleteItem {
+			display: block;
+			font-weight:300;
+			cursor: default;
+			position: absolute;
+			font-size:1.6em;
+			line-height: 1.07em;
+			top: 0;
+			right: 0;
+			bottom:0;
+			padding-right: 0.2em;
+			opacity: 0.8;
+			transition: all 200ms ease;
+		}
+		
+		.pillbox > li > span.deleteItem:hover {
+			font-weight: 400;
+			opacity:1;
+			color: #0088CC;
+		}
+		
+		.linethrough {
+			text-decoration: line-through;
+		}
+		
+		input[type=text] {
+			margin:0;
+			font-size: 1em;
+			padding-left: 0.3em;
+			background: rgba(0,0,0,0.05);
+			border: none;
+			width: 175px;
+			height: 35px;
+			line-height: 35px;
+			outline: none;
+		}
+		button {
+			margin:0;
+			position: relative;
+			margin-left: -5px;
+			top: 1px;
+			border: none;
+			outline: none;
+			background-color: #0e90d2;
+			color: white;
+			height: 35px;
+			width: 75px;
+			line-height: 35px;
+			font-size: 1em;
+			font-weight: 500;
+		}
+		button:before {
+			content: "";
+			position: absolute;
+			height: 0;
+			width: 0;
+			border: 5px solid #0e90d2;
+			border-left:5px solid transparent;
+			border-top: 5px solid transparent;
+			right:100%;
+			bottom:0;
+		}
+
+	</style>
+  </head>
+  <body>
+		<div class="topbar clearfix">
+			<h1 class="heading">Twitter Savior</h1>
+			<span class="version">version: 0.0.1</span>
+		</div>
+		<div class="clearfix">
+			<div class="half-cont">
+				<h2 class="heading">Blacklist</h3>
+				<ul id="blacklist" class="pillbox">
+				</ul>
+			</div>
+			<div class="half-cont">
+				<h2 class="heading">Whitelist</h2>
+				<ul id="whitelist" class="pillbox">
+				</ul>
+			</div>		
+		</div>
+		<div class="clearfix">
+			<div class="half-cont" id="blacklistForm"> 
+				<input  type="text" placeholder="Enter Blacklist Item">
+				<button type="button">Add</button>
+			</div>		
+			<div class="half-cont" id="whitelistForm"> 
+				<input  type="text" placeholder="Enter Whitelist Item">
+				<button type="button">Add</button>
+			</div>				
+		</div>
+	<div id="console"></div>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/back.js"></script>
+  </body>
+</html>
+
