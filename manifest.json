@@ -1,7 +1,7 @@
 { 
 	"manifest_version": 2,
 	"name": "Twitter Savior Dev",
-	"version": "1",
+	"version": "0.0.2",
 	"background": {"scripts":["src/js/jquery-1.10.2.min.js", "src/js/background.js"]},
 	"browser_action": {
 		"default_icon": "src/img/icon.png",
@@ -10,8 +10,7 @@
 	"content_scripts": [
 	{
 	  "matches": ["https://twitter.com/*", "https://twitter.com/*/*"],
-	  "js": [ "src/js/jquery-1.10.2.min.js", "src/js/work.js"],
-	  "css": ["src/css/twitterSaviorStyles.css"]
+	  "js": [ "src/js/jquery-1.10.2.min.js"]
 	}
   ]
 }

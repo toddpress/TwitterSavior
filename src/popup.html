@@ -1,10 +1,9 @@
-﻿<!doctype html>
+<!doctype html>
 <html>
   <head>
   <meta charset="utf-8">
     <title>Tweet Savior</title>
 	<link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/twitterSaviorStyles.css">
 	<style>
 		*{
 			box-sizing: border-box;
@@ -18,6 +17,7 @@
 			background-repeat:repeat-x;
 			color:#4F545A;
 			min-width:640px;
+			padding-top: 10px;
 		}
 		
 		.topbar {
@@ -35,6 +35,10 @@
 			display: inline-block;
 			font-size: 1.4em;
 			margin:0;
+		}
+		h2 {
+			font-weight: 500;
+			margin-bottom: 0;
 		}
 		.topbar span.version {
 			display: inline-block;
@@ -145,26 +149,34 @@
 			right:100%;
 			bottom:0;
 		}
-
 	</style>
+	<script src="js/jquery-1.10.2.min.js"></script>
+	<script src="js/popup.js"></script>	
   </head>
   <body>
 		<div class="topbar clearfix">
 			<h1 class="heading">Twitter Savior</h1>
-			<span class="version">version: 0.0.1</span>
+			<span class="version">version: 0.0.2</span>
 		</div>
 		<div class="clearfix">
 			<div class="half-cont">
-				<h2 class="heading">Blacklist</h3>
+				<h2>Blacklist</h2>
+			</div>	
+			<div class="half-cont">
+				<h2>Whitelist</h2>
+			</div>
+		</div>	
+		<div id="listsContainer" class="clearfix">
+			<div class="half-cont">	
 				<ul id="blacklist" class="pillbox">
 				</ul>
 			</div>
 			<div class="half-cont">
-				<h2 class="heading">Whitelist</h2>
 				<ul id="whitelist" class="pillbox">
 				</ul>
 			</div>		
 		</div>
+		<div id="console" style="clear: both; height:1px;"></div>
 		<div class="clearfix">
 			<div class="half-cont" id="blacklistForm"> 
 				<input  type="text" placeholder="Enter Blacklist Item">
@@ -175,9 +187,5 @@
 				<button type="button">Add</button>
 			</div>				
 		</div>
-	<div id="console"></div>
-	<script src="js/jquery-1.10.2.min.js"></script>
-	<script src="js/back.js"></script>
   </body>
 </html>
-
