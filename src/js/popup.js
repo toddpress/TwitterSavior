@@ -41,8 +41,6 @@ function init(){
 	reflowULs();
 }
 
-
-
 function isNullOrWhiteSpace(str){
     return str === null || str.match(/^ *$/) !== null;
 }
@@ -58,7 +56,6 @@ function validateInput(value) {
 		}
 		return false;
 	}
-	
 }
 
 function listChangeHandler(_list) {
@@ -98,8 +95,6 @@ $(function() {
 			if(validateInput(item)){
 				$("#whitelist").append("<li><span>"+item+"</span><span class='deleteItem'>&#x00D7;</span>");			
 				listChangeHandler("whitelist");
-
-
 			}	
 			input.val("");
 		}
