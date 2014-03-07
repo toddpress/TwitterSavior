@@ -9,10 +9,24 @@ var defaultSettings = {
 		}
 	}
 
-// function cl(msg) {
-// 	console.log(msg); 
-// };
-// 
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+    if (request.method == "getLocalStorage") {
+    	var key = request.key,
+    		settingsObj = JSON.parse(localStorage.settings),
+    		res = {};
+    		
+    	if (key === 'lists') {
+    		res.whitelist = settingsObj.whitelist;
+    		res.blacklist = settingsObj.blacklist;
+    	} else if (key === 'settings') {
+    		res = settingsObj.options;
+    	}
+    	sendResponse({data: res});
+    } else {
+    	sendResponse({}); // snub them.
+    }
+});
+
 function handleStorage() {
 	if(!localStorage.settings){
 		localStorage.settings = JSON.stringify(defaultSettings);

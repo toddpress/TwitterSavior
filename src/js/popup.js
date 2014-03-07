@@ -38,7 +38,9 @@ function init(){
 	for (b in blacklist) {
 		$('#blacklist').append("<li class='"+bClass+"'><span>"+blacklist[b]+"</span><span class='deleteItem'>&#x00D7;</span>");
 	}
-	reflowULs();
+	setTimeout(function(){
+		reflowULs();
+	}, 10);
 }
 
 function isNullOrWhiteSpace(str){
