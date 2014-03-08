@@ -1,9 +1,14 @@
 var bg = chrome.extension.getBackgroundPage();
 var settings, whitelist, blacklist, options, useWhitelist, useBlacklist;
 
-// function cl(msg) {
-// 	console.log(msg);
-// }
+function changedLocalStorage() {
+	chrome.tabs.query({currentWindow: true}, function(tabs){		
+		var len = tabs.length;
+		for (var i = 0; i<len; i++) {
+ 			chrome.tabs.sendMessage(tabs[i].id, {method: 'changedLocalStorage'});
+ 		}
+	});
+}
 
 function reflowULs(){
 	$(".pillbox").each(function(){
@@ -21,11 +26,10 @@ function reflowULs(){
 }
 
 function init(){
-	var settings = bg.handleStorage();
+	settings = bg.handleStorage();
 	whitelist = settings.whitelist;
 	blacklist = settings.blacklist;
 	options = settings.options;
-	console.log(settings);
 	useWhitelist = options.use_whitelist;
 	useBlacklist = options.use_blacklist;
 
@@ -65,17 +69,18 @@ function listChangeHandler(_list) {
 		list = _list;
 
 	$('#'+list+' li').each(function(i, el){
-		var text = $(el).find('span:first-child').text();
+		var text = $.trim($(el).find('span:first-child').text().toLowerCase());
 		listArray.push(text);
 	});
 	var currentSettings = JSON.parse(localStorage.settings);
 	currentSettings[list] = listArray;
 	localStorage.settings = JSON.stringify(currentSettings);
+	changedLocalStorage();
 	reflowULs();
 }
 
 $(function() {
-	// localStorage.clear(); // newest
+	// localStorage.clear(); // remove in prod
 	init();
 	
 	$("#blacklistForm input").on("keypress", function(e){
