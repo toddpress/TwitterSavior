@@ -10,7 +10,8 @@
 	"content_scripts": [
 	{
 	  "matches": ["https://twitter.com/*", "https://twitter.com/*/*"],
-	  "js": ["src/js/jquery-1.10.2.min.js", "src/js/content-script.js"]
+	  "js": ["src/js/jquery-1.10.2.min.js", "src/js/content-script.js"],
+	  "css": ["src/css/saviorStyles.css"]
 	}
   ]
 }

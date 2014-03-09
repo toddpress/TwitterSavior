@@ -52,16 +52,11 @@ function isNullOrWhiteSpace(str){
 }
 
 function validateInput(value) {
-	var bl = blacklist,
-		wl = whitelist,
-		lists = bl.concat(wl);
-
-	if (lists.indexOf(value) === -1) {
-		if (!isNullOrWhiteSpace(value)){
-			return true;
-		}
-		return false;
+	if ($('.pillbox li:contains('+ value + ')').length) return false;
+	if (!isNullOrWhiteSpace(value)){
+		return true;
 	}
+	return false;
 }
 
 function listChangeHandler(_list) {
@@ -77,6 +72,7 @@ function listChangeHandler(_list) {
 	localStorage.settings = JSON.stringify(currentSettings);
 	changedLocalStorage();
 	reflowULs();
+	return true;
 }
 
 $(function() {
@@ -134,9 +130,10 @@ $(function() {
 		listItem = $(e.target).parent();
 		list = $(listItem).parents("ul").attr("id");
 		$(listItem).fadeOut(400, function(){
-			$.when($(this).remove()).then(reflowULs());
-				listChangeHandler(list);
+			$.when($(this).remove()).then(listChangeHandler(list));
+			reflowULs();
 		});		
+		
 	});
 	
 	$(".pillbox").on("mouseenter mouseleave", "span.deleteItem", function(){
