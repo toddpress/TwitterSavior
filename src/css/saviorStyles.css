@@ -1,11 +1,11 @@
 li[data-item-type='tweet'] {
-	-webkit-transition: margin 0.2s ease-out;
+	-webkit-transition: margin 0.4s ease-out;
 }	
 
-.blacklisted,
-.blacklisted *,
-.blacklisted .tweet,
-.blacklisted-tweet:hover {
+.blacklisted:not(.unblurred),
+.blacklisted:not(.unblurred) *,
+.blacklisted:not(.unblurred) .tweet,
+.blacklisted-tweet:not(.unblurred):hover {
 	cursor: default !important;
 	border: none !important;
 	background: rgb(255,255,255) !important;
@@ -13,17 +13,14 @@ li[data-item-type='tweet'] {
 	color: rgba(0,0,0,0.1) !important;
 	text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6) !important;
 	-webkit-user-select: none !important;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-o-user-select: none;
 	user-select: none !important; 
 }
 
-.blacklisted ::selection {
+.blacklisted:not(.unblurred) ::selection {
 	background-color: transparent !important;
 }
 
-.blacklisted {
+.blacklisted:not(.unblurred) {
 	position: relative;
 	margin-top: 20px;
 	margin-bottom: 20px;
@@ -31,38 +28,50 @@ li[data-item-type='tweet'] {
 	-webkit-transform: scale(0.9);
 			transform: scale(0.9);
 	-webkit-user-select: none !important;
+			user-select: none !important;
 }
 
-.blacklisted .stream-item-header img.avatar {
+.blacklisted:not(.unblurred) img {
 	-webkit-filter: blur(2px);
 }
 
-.blacklisted button.unblurTweet {
+.blacklisted:not(.unblurred) .has-cards .cards-media-container img {
+	-webkit-filter: blur(20px);
+} 
+
+.blacklisted:not(.unblurred) button.unblurTweet {
 	margin:0;
 	position: absolute;
 	top: 1px;
 	border: none;
 	outline: none;
-	background-color: #0e90d2 !important;
-	color: white !important;
-	line-height: 35px;
-	font-size: 1.2em;
+	background-color: transparent !important;
+	box-sizing: content-box;
+	border: 4px solid #444 !important;
+	color: #444 !important;
+	line-height: 30px;
+	font-size: 1.5em;
 	font-weight: 500;
-	height: 35px;
+	height: 30px;
 	width: 135px;
 	z-index: 1;
 	top:5px;
 	bottom:0;
-	left:77%;	
-	font-weight: 500 !important;
+	left:73.5%;	
+	font-weight: 700 !important;
 	text-shadow: none !important;
 	box-shadow: none !important;
-	-webkit-transition-propery: width, height, right;
-	-webkit-transition-duration: 0.4s, 0.4s, 0.6s;
-	-webkit-transition-timing-function: ease-in, ease-in, ease-out;
+	-webkit-transition-propery: width, height, right, color;
+	-webkit-transition-duration: 0.4s, 0.4s, 0.6s, 0.1s;
+	-webkit-transition-timing-function: ease-in, ease-in, ease-out, ease-in;
 }
 
-.blacklisted button.unblurTweet.btn-hidden {
+button.unblurTweet:hover {
+	color: #0e90d2 !important;
+}
+
+
+button.unblurTweet.blur-tweet {
 	position: absolute;
 	display: hidden;
 	margin:0;
