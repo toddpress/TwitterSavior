@@ -1,3 +1,7 @@
+/**
+ * todo: make this not suck
+ */
+
 li[data-item-type='tweet'] {
 	-webkit-transition: margin 0.4s ease-out;
 }	
