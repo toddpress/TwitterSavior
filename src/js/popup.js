@@ -130,7 +130,8 @@ $(function() {
 		listItem = $(e.target).parent();
 		list = $(listItem).parents("ul").attr("id");
 		$(listItem).fadeOut(400, function(){
-			$.when($(this).remove()).then(listChangeHandler(list));
+			$(this).remove();
+			listChangeHandler(list);
 			reflowULs();
 		});		
 		

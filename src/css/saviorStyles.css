@@ -1,8 +1,13 @@
+/* just for testing */
+.blacklist .tweet-text {
+	background-color: #000 !important;
+}
+
 /**
  * todo: make this not suck
  */
 
-li[data-item-type='tweet'] {
+/*li[data-item-type='tweet'] {
 	-webkit-transition: margin 0.4s ease-out;
 }	
 
@@ -86,5 +91,5 @@ button.unblurTweet.blur-tweet {
 	height: 0px;
 	right:0;
 } 
-
+*/
 

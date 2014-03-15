@@ -1,5 +1,4 @@
-// very contents. wow. 
-var blacklist, whitelist, unhandledTweets;
+var blacklist, whitelist, unhandledTweets, $tweets;
 
 // $.fn.isNearViewport = function(){
 // 	var win = $(window),
@@ -27,10 +26,50 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 function getLocalStorage() {
 	chrome.runtime.sendMessage({method: "getLocalStorage", key: "lists"}, function(response) {
 		var lists = response.data;
-		blacklist = lists.blacklist;
-		whitelist = lists.whitelist;
-		// handleTweets();
-		console.log('blacklist', blacklist, 'whitelist', whitelist);
+		blacklist = formatList(lists.blacklist);
+		whitelist = formatList(lists.whitelist);
 	});	
 }
 
+function formatList(listArray) {
+	var formattedList = {};
+	listArray = $.makeArray(listArray);
+	$.map(listArray, function(key, i) {
+		return formattedList[key] = true;
+	});
+	return formattedList;
+}
+
+function handleTweets(tweets) {
+	$('.blacklist').removeClass('blacklist')
+	tweets.each(function(i, tweet) {
+		var words = $(tweet).find('.tweet-text').text().split(' ');
+		for (var i=0, len = words.length; i < len; i++) {
+			if (blacklist[words[i]]) {
+				$(tweet).addClass('blacklist');
+			} 
+		}
+	});
+}
+
+getLocalStorage();
+
+$(function() {
+	$tweets = $('li[id^="stream-item-tweet"]');
+	$tweets = $($tweets);
+	handleTweets($tweets);
+});
+
+setInterval(function(){
+	handleTweets($tweets);
+}, 1000);	
+
+var timeline = document.getElementById('timeline');
+
+timeline.addEventListener('DOMNodeInserted', function(e) {
+	if ($(e.target).data('item-type') == 'tweet') {
+		if ($tweets){
+			$tweets.push($(e.target));
+		}
+	}
+}, false);
