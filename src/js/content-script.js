@@ -34,11 +34,12 @@ function getRegExList(arrList) {
 
 function handleTweets() {
 	$('.blacklist').removeClass('blacklist');
+	$('div.promoted-tweet').parent().remove(); // bc eff that
 	$('#timeline li[data-item-type="tweet"]').each(function(i, tweet) {
 		var txt = $(tweet).find('.tweet-text').text();
 		if (blacklist.length && reBlacklist.test(txt)) {
 			$(tweet).addClass('blacklist');
-		}
+		} 
 	});
 }
 
@@ -53,6 +54,13 @@ $(function() {
 		}
 	}, false);
 
+	$("[data-item-type='tweet']").on('click', function(e) {
+		// Doesnt work for RTs??
+		if ($(this).parents('.blacklist')){
+			e.preventDefault();
+			e.stopPropagation();
+		}
+	});
 });
 
 

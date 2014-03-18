@@ -1,20 +1,13 @@
-/* just for testing */
-.blacklist .tweet-text {
-	background-color: #000 !important;
-}
-
 /**
- * todo: make this not suck
+ * todo: make this suck less
  */
 
-/*li[data-item-type='tweet'] {
+li[data-item-type='tweet'] {
 	-webkit-transition: margin 0.4s ease-out;
 }	
 
-.blacklisted:not(.unblurred),
-.blacklisted:not(.unblurred) *,
-.blacklisted:not(.unblurred) .tweet,
-.blacklisted-tweet:not(.unblurred):hover {
+.blacklist, 
+.blacklist * {
 	cursor: default !important;
 	border: none !important;
 	background: rgb(255,255,255) !important;
@@ -25,71 +18,15 @@
 	user-select: none !important; 
 }
 
-.blacklisted:not(.unblurred) ::selection {
-	background-color: transparent !important;
-}
-
-.blacklisted:not(.unblurred) {
+.blacklist {
 	position: relative;
 	margin-top: 20px;
 	margin-bottom: 20px;
 	box-shadow: 0px 0px 10px 10px rgba(255,255,255,1);
 	-webkit-transform: scale(0.9);
-			transform: scale(0.9);
 	-webkit-user-select: none !important;
-			user-select: none !important;
 }
 
-.blacklisted:not(.unblurred) img {
+.blacklist img {
 	-webkit-filter: blur(2px);
 }
-
-.blacklisted:not(.unblurred) .has-cards .cards-media-container img {
-	-webkit-filter: blur(20px);
-} 
-
-.blacklisted:not(.unblurred) button.unblurTweet {
-	margin:0;
-	position: absolute;
-	top: 1px;
-	border: none;
-	outline: none;
-	background-color: transparent !important;
-	box-sizing: content-box;
-	border: 4px solid #444 !important;
-	color: #444 !important;
-	line-height: 30px;
-	font-size: 1.5em;
-	font-weight: 500;
-	height: 30px;
-	width: 135px;
-	z-index: 1;
-	top:5px;
-	bottom:0;
-	left:73.5%;	
-	font-weight: 700 !important;
-	text-shadow: none !important;
-	box-shadow: none !important;
-	-webkit-transition-propery: width, height, right, color;
-	-webkit-transition-duration: 0.4s, 0.4s, 0.6s, 0.1s;
-	-webkit-transition-timing-function: ease-in, ease-in, ease-out, ease-in;
-}
-
-button.unblurTweet:hover {
-	color: #0e90d2 !important;
-}
-
-
-button.unblurTweet.blur-tweet {
-	position: absolute;
-	display: hidden;
-	margin:0;
-	background-color: blue !important;
-	border: none;
-	outline: none;
-	width:0px;
-	height: 0px;
-	right:0;
-} 
-*/
-
