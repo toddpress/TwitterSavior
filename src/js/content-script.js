@@ -1,6 +1,5 @@
 /**
- * Huge thanks to @jmar777 for great advice
- * 
+ * Huge thanks to @jmar777 for great advice on tweet handling
  */
 
 var blacklist, whitelist, reBlacklist, reWhitelist,
