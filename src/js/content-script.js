@@ -1,20 +1,11 @@
-var blacklist, whitelist, unhandledTweets, $tweets;
+/**
+ * Huge thanks to @jmar777 for great advice
+ * 
+ */
 
-// $.fn.isNearViewport = function(){
-// 	var win = $(window),
-// 		top = win.scrollTop(),
-// 		bottom = top + win.height();
-
-// 	var view = {
-// 		top : top,
-// 		bottom: bottom
-// 	};
-	
-// 	var bounds = this.offset();
-// 	bounds.bottom = bounds.top + this.outerHeight();
-	
-// 	return (!(view.bottom < bounds.top || view.top > bounds.bottom));
-// };
+var blacklist, whitelist, reBlacklist, reWhitelist,
+	reOpen = '(?:^|[^a-z])(?:',
+	reClose = ')(?:$|[^a-z])';
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	if (request.method == 'changedLocalStorage') {
@@ -26,50 +17,43 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 function getLocalStorage() {
 	chrome.runtime.sendMessage({method: "getLocalStorage", key: "lists"}, function(response) {
 		var lists = response.data;
-		blacklist = formatList(lists.blacklist);
-		whitelist = formatList(lists.whitelist);
+		blacklist = lists.blacklist;
+		whitelist = lists.whitelist;
+		reBlacklist = getRegExList(blacklist);
+		reWhitelist = getRegExList(whitelist);		
+		handleTweets();
 	});	
 }
 
-function formatList(listArray) {
-	var formattedList = {};
-	listArray = $.makeArray(listArray);
-	$.map(listArray, function(key, i) {
-		return formattedList[key] = true;
+function getRegExList(arrList) {
+	escList = arrList.map(function(item) {
+		return item.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&");
 	});
-	return formattedList;
+
+	return new RegExp(reOpen + escList.join('|') + reClose, 'i');
 }
 
-function handleTweets(tweets) {
-	$('.blacklist').removeClass('blacklist')
-	tweets.each(function(i, tweet) {
-		var words = $(tweet).find('.tweet-text').text().split(' ');
-		for (var i=0, len = words.length; i < len; i++) {
-			if (blacklist[words[i]]) {
-				$(tweet).addClass('blacklist');
-			} 
+function handleTweets() {
+	$('.blacklist').removeClass('blacklist');
+	$('#timeline li[data-item-type="tweet"]').each(function(i, tweet) {
+		var txt = $(tweet).find('.tweet-text').text();
+		if (blacklist.length && reBlacklist.test(txt)) {
+			$(tweet).addClass('blacklist');
 		}
 	});
 }
-
-getLocalStorage();
 
 $(function() {
-	$tweets = $('li[id^="stream-item-tweet"]');
-	$tweets = $($tweets);
-	handleTweets($tweets);
+	getLocalStorage();
+
+	document.getElementById('timeline').addEventListener('DOMNodeInserted', function(e) {
+		if ($(e.target).data('item-type') == 'tweet') {
+			setTimeout(function() {
+				handleTweets();
+			}, 200);
+		}
+	}, false);
+
 });
 
-setInterval(function(){
-	handleTweets($tweets);
-}, 1000);	
 
-var timeline = document.getElementById('timeline');
-
-timeline.addEventListener('DOMNodeInserted', function(e) {
-	if ($(e.target).data('item-type') == 'tweet') {
-		if ($tweets){
-			$tweets.push($(e.target));
-		}
-	}
-}, false);
